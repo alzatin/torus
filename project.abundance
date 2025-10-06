@@ -18,7 +18,7 @@
     {
       "atomType": "Code",
       "name": "Code",
-      "x": 0.5736505032021958,
+      "x": 0.5773101555352241,
       "y": 0.36024844720496896,
       "uniqueID": "db7d8296-29e2-4499-9963-94f044be6347",
       "ioValues": [
@@ -33,7 +33,7 @@
         }
       ],
       "codeVersion": 1,
-      "code": "\n      const Inputs = [\n        \n       {inputName: \"circleShape\", type: \"geometry\", defaultValue: null},\n       {inputName: \"minorRadius\", type: \"number\", defaultValue: 5},\n      {inputName: \"majorRadius\", type: \"number\", defaultValue: 10},\n      ]\n\n      let createdCircle = library[circleShape]\n      const newPlane = new replicad.Plane().pivot(0, 'Y')\n      let profile = createdCircle.sketchOnPlane(\"XY\")\n       const torus = createdCircle.revolve();\n\n      //Wrap the raw replicad geometry in our assembly format\n      let shape2 = {\n          geometry: [createdCircle],\n          dimension: \"3D\",\n          tags: [\"createdShape\"],\n          color: '#A3CE5B',\n          plane: newPlane,\n          bom: []\n      }\nreturn shape2"
+      "code": "\n      const Inputs = [\n        \n       {inputName: \"circleShape\", type: \"geometry\", defaultValue: null},\n       {inputName: \"minorRadius\", type: \"number\", defaultValue: 5},\n      {inputName: \"majorRadius\", type: \"number\", defaultValue: 10},\n      ]\n\n       let createdRectangle = replicad.drawCircle(5, 7)\n      const newPlane = new replicad.Plane().pivot(0, 'Y')\n      let createdShape = createdRectangle.sketchOnPlane(newPlane).translate([0,10,0])\n       //const torus = createdCircle.revolve();\n\n      //Wrap the raw replicad geometry in our assembly format\n      let shape2 = {\n          geometry: [createdShape],\n          dimension: \"3D\",\n          tags: [\"createdShape\"],\n          color: '#A3CE5B',\n          plane: newPlane,\n          bom: []\n      }\nreturn shape2"
     },
     {
       "atomType": "Circle",
@@ -110,8 +110,8 @@
     {
       "atomType": "Code",
       "name": "Code",
-      "x": 0.5818847209515096,
-      "y": 0.7391304347826086,
+      "x": 0.5727355901189387,
+      "y": 0.7577639751552795,
       "uniqueID": "4ab1caee-6bf8-41d5-865c-fd1aa72f37ec",
       "ioValues": [
         {
@@ -128,12 +128,6 @@
     }
   ],
   "allConnectors": [
-    {
-      "ap1Name": "output",
-      "ap2Name": "shape",
-      "ap1ID": "db7d8296-29e2-4499-9963-94f044be6347",
-      "ap2ID": "4ab1caee-6bf8-41d5-865c-fd1aa72f37ec"
-    },
     {
       "ap1Name": "geometry",
       "ap2Name": "geometry",
