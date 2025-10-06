@@ -18,8 +18,8 @@
     {
       "atomType": "Code",
       "name": "Code",
-      "x": 0.5773101555352241,
-      "y": 0.36024844720496896,
+      "x": 0.5818847209515096,
+      "y": 0.35093167701863354,
       "uniqueID": "db7d8296-29e2-4499-9963-94f044be6347",
       "ioValues": [
         {
@@ -33,7 +33,7 @@
         }
       ],
       "codeVersion": 1,
-      "code": "\n      const Inputs = [\n        \n       {inputName: \"circleShape\", type: \"geometry\", defaultValue: null},\n       {inputName: \"minorRadius\", type: \"number\", defaultValue: 5},\n      {inputName: \"majorRadius\", type: \"number\", defaultValue: 10},\n      ]\n\n       let createdRectangle = replicad.drawCircle(5, 7)\n      const newPlane = new replicad.Plane().pivot(0, 'Y')\n      let createdShape = createdRectangle.sketchOnPlane(newPlane).translate([0,10,0])\n       //const torus = createdCircle.revolve();\n\n      //Wrap the raw replicad geometry in our assembly format\n      let shape2 = {\n          geometry: [createdShape],\n          dimension: \"3D\",\n          tags: [\"createdShape\"],\n          color: '#A3CE5B',\n          plane: newPlane,\n          bom: []\n      }\nreturn shape2"
+      "code": "\n      const Inputs = [\n        \n       {inputName: \"circleShape\", type: \"geometry\", defaultValue: null},\n       {inputName: \"minorRadius\", type: \"number\", defaultValue: 5},\n      {inputName: \"majorRadius\", type: \"number\", defaultValue: 10},\n      ]\n\n\n       let createdRectangle = replicad.drawCircle(5, 7)\n      const newPlane = new replicad.Plane().pivot(0, 'Y')\n      let createdShape = createdRectangle.sketchOnPlane(newPlane).translate([0,0,0])\n       //const torus = createdCircle.revolve();\n  //Use the built-in Move function to move the shape in the X direction\n      let movedShape = await Move(importedShape, 5, 0, 0)\n\n      //Use the built-in Rotate function to rotate the shape\n      let rotatedShape = await Rotate(importedShape, 0, 45, 0)\n\n      //Wrap the raw replicad geometry in our assembly format\n      let shape2 = {\n          geometry: [createdShape],\n          dimension: \"3D\",\n          tags: [\"createdShape\"],\n          color: '#A3CE5B',\n          plane: newPlane,\n          bom: []\n      }\nreturn shape2"
     },
     {
       "atomType": "Circle",
@@ -110,8 +110,8 @@
     {
       "atomType": "Code",
       "name": "Code",
-      "x": 0.5727355901189387,
-      "y": 0.7577639751552795,
+      "x": 0.5699908508691675,
+      "y": 0.7795031055900621,
       "uniqueID": "4ab1caee-6bf8-41d5-865c-fd1aa72f37ec",
       "ioValues": [
         {
