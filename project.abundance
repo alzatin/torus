@@ -18,8 +18,8 @@
     {
       "atomType": "Code",
       "name": "Code",
-      "x": 0.4602012808783165,
-      "y": 0.3105590062111801,
+      "x": 0.4455626715462031,
+      "y": 0.406832298136646,
       "uniqueID": "db7d8296-29e2-4499-9963-94f044be6347",
       "ioValues": [
         {
@@ -33,14 +33,28 @@
         }
       ],
       "codeVersion": 1,
-      "code": "\n      const Inputs = [\n        \n       {inputName: \"circleShape\", type: \"geometry\", defaultValue: null},\n       {inputName: \"minorRadius\", type: \"number\", defaultValue: 5},\n      {inputName: \"majorRadius\", type: \"number\", defaultValue: 10},\n      ]\n\n      let createdCircle = circleShape[geometry][0]\n      const newPlane = new replicad.Plane().pivot(0, 'Y')\n      let profile = createdCircle.sketchOnPlane(\"XY\")\nconsole.log(profile)\n      let createdShape = profile.revolve();\n\n      //Wrap the raw replicad geometry in our assembly format\n      let shape2 = {\n          geometry: [createdCircle],\n          dimension: \"3D\",\n          tags: [\"createdShape\"],\n          color: '#A3CE5B',\n          plane: newPlane,\n          bom: []\n      }\nreturn shape2"
+      "code": "\n      const Inputs = [\n        \n       {inputName: \"circleShape\", type: \"geometry\", defaultValue: null},\n       {inputName: \"minorRadius\", type: \"number\", defaultValue: 5},\n      {inputName: \"majorRadius\", type: \"number\", defaultValue: 10},\n      ]\n\n      let createdCircle = library[circleShape]\n      const newPlane = new replicad.Plane().pivot(0, 'Y')\n      let profile = createdCircle.sketchOnPlane(\"XY\")\n       const torus = createdCircle.revolve();\n\n      //Wrap the raw replicad geometry in our assembly format\n      let shape2 = {\n          geometry: [createdCircle],\n          dimension: \"3D\",\n          tags: [\"createdShape\"],\n          color: '#A3CE5B',\n          plane: newPlane,\n          bom: []\n      }\nreturn shape2"
     },
     {
       "atomType": "Circle",
       "name": "Circle",
-      "x": 0.1967063129002745,
-      "y": 0.5527950310559007,
+      "x": 0.20036596523330286,
+      "y": 0.40993788819875776,
       "uniqueID": "7e7d4f41-a0f1-43b9-a915-a8f364d1b3af",
+      "ioValues": [
+        {
+          "name": "diameter",
+          "ioValue": 5,
+          "currentEquation": "5"
+        }
+      ]
+    },
+    {
+      "atomType": "Circle",
+      "name": "Circle",
+      "x": 0.16834400731930468,
+      "y": 0.5962732919254659,
+      "uniqueID": "38d0145f-68dd-43f3-b38e-ea3d453e4eaa",
       "ioValues": [
         {
           "name": "diameter",
@@ -49,30 +63,60 @@
       ]
     },
     {
-      "atomType": "Code",
-      "name": "Code",
-      "x": 0.45471180237877407,
-      "y": 0.7049689440993789,
-      "uniqueID": "992ce9c1-8dbe-42a9-a1b2-38007ff60c19",
+      "atomType": "Difference",
+      "name": "Difference",
+      "x": 0.36596523330283626,
+      "y": 0.6055900621118013,
+      "uniqueID": "c0370bc9-7518-43a1-b04f-4b41e9394acf",
+      "ioValues": []
+    },
+    {
+      "atomType": "Rotate",
+      "name": "Rotate",
+      "x": 0.5937785910338518,
+      "y": 0.4627329192546583,
+      "uniqueID": "8ce67204-f488-4e84-b500-3e74b64bf1b2",
       "ioValues": [
         {
-          "name": "dist",
-          "ioValue": 5
+          "name": "x-axis degrees",
+          "ioValue": 0
         },
         {
-          "name": "height",
-          "ioValue": 10
+          "name": "y-axis degrees",
+          "ioValue": 90,
+          "currentEquation": "90"
+        },
+        {
+          "name": "z-axis degrees",
+          "ioValue": 0,
+          "currentEquation": "0"
         }
-      ],
-      "codeVersion": 1,
-      "code": "\n      const Inputs = [\n       {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n      {inputName: \"dist\", type: \"number\", defaultValue: 5},\n        {inputName: \"height\", type: \"number\", defaultValue: 10}\n      ]\n      //This defines the molecules inputs and creates variables with the same names which can be referenced in the code\n\n      //Gets the shape from the library - no need to clone or access geometry directly\n      let importedShape = library[shape]\n\n      //Use the built-in Move function to move the shape in the X direction\n      let movedShape = await Move(importedShape, dist, 0, 0)\n\n      //Use the built-in Rotate function to rotate the shape\n      let rotatedShape = await Rotate(importedShape, 0, 45, 0)\n\n      //Use the built-in Scale function to make the shape smaller\n      let scaledShape = await Scale(importedShape, 0.8)\n\n      //Console.log works for debugging to better see what is happening under the hood\n      console.log(\"Original shape bounds:\", GetBounds(importedShape))\n      console.log(\"Moved shape bounds:\", GetBounds(movedShape))\n\n      //Create a new shape from scratch using replicad\n      let createdRectangle = replicad.drawRectangle(5, 7)\n      const newPlane = new replicad.Plane().pivot(0, 'Y')\n      let createdShape = createdRectangle.sketchOnPlane(newPlane).extrude(height)\n\n      //Wrap the raw replicad geometry in our assembly format\n      let shape2 = {\n          geometry: [createdShape],\n          dimension: \"3D\",\n          tags: [\"createdShape\"],\n          color: '#A3CE5B',\n          plane: newPlane,\n          bom: []\n      }\n\n      //Use the built-in Fillet function to round the edges\n      let filletedShape = await Fillet(shape2, 0.5)\n\n      //Use the built-in Chamfer function to bevel the edges  \n      let chamferedShape = await Chamfer(movedShape, 0.3)\n\n      //Use the built-in Assembly function to combine multiple shapes\n      let finalAssembly = await Assembly([rotatedShape, scaledShape, filletedShape, chamferedShape])\n\n      //You can also create boolean operations using Intersect\n      //let intersection = await Intersect(movedShape, rotatedShape)\n\n      return finalAssembly\n\n      /**\n      Built-in Functions Available:\n      - Move(geometry, x, y, z) - Move a shape in 3D space\n      - Rotate(geometry, x, y, z) - Rotate a shape around X, Y, Z axes (degrees)\n      - Scale(geometry, factor) - Scale a shape by a factor\n      - Assembly([shapes]) - Combine multiple shapes into an assembly\n      - Intersect(shape1, shape2) - Boolean intersection of two shapes\n      - GetBounds(geometry) - Get the bounding box of a shape\n      - Fillet(geometry, radius) - Round edges with specified radius\n      - Chamfer(geometry, size) - Bevel edges with specified size\n\n      To Use the Code Atom, enter your inputs to the input list as an object array:\n      const Inputs = [\n        {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n        {inputName: \"dist\", type: \"number\", defaultValue: 5},\n        {inputName: \"height\", type: \"number\", defaultValue: 10}\n      ]\n\n      Access imported geometry using library[inputName] - the built-in functions handle \n      the complexity of accessing geometry arrays and maintaining metadata automatically.\n\n      Simple Example - Move a shape:\n         const Inputs = [\n          {inputName: \"shape\", type: \"geometry\", defaultValue: null},\n          {inputName: \"x\", type: \"number\", defaultValue: 5}\n        ]\n        let movedShape = await Move(library[shape], x, 0, 0)\n        return movedShape\n      */\n      "
+      ]
     }
   ],
   "allConnectors": [
     {
+      "ap1Name": "output",
+      "ap2Name": "geometry",
+      "ap1ID": "db7d8296-29e2-4499-9963-94f044be6347",
+      "ap2ID": "8ce67204-f488-4e84-b500-3e74b64bf1b2"
+    },
+    {
+      "ap1Name": "geometry",
+      "ap2Name": "geometry2",
+      "ap1ID": "7e7d4f41-a0f1-43b9-a915-a8f364d1b3af",
+      "ap2ID": "c0370bc9-7518-43a1-b04f-4b41e9394acf"
+    },
+    {
+      "ap1Name": "geometry",
+      "ap2Name": "geometry1",
+      "ap1ID": "38d0145f-68dd-43f3-b38e-ea3d453e4eaa",
+      "ap2ID": "c0370bc9-7518-43a1-b04f-4b41e9394acf"
+    },
+    {
       "ap1Name": "geometry",
       "ap2Name": "circleShape",
-      "ap1ID": "7e7d4f41-a0f1-43b9-a915-a8f364d1b3af",
+      "ap1ID": "c0370bc9-7518-43a1-b04f-4b41e9394acf",
       "ap2ID": "db7d8296-29e2-4499-9963-94f044be6347"
     }
   ],
