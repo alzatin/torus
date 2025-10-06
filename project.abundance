@@ -1,15 +1,43 @@
 {
-    "atomType": "Molecule",
-    "name": "torus",
-    "x": 0,
-    "y": 0,
-    "uniqueID": "2ec8d6d5-6791-4e47-a95c-7d7a479afe28",
-    "ioValues": [],
-    "topLevel": true,
-    "allAtoms": [],
-    "allConnectors": [],
-    "unitsKey": "MM",
-    "fileTypeVersion": 1,
-    "compiledBom": {},
-    "filetypeVersion": 1
+  "atomType": "Molecule",
+  "name": "torus",
+  "x": 0,
+  "y": 0,
+  "uniqueID": "2ec8d6d5-6791-4e47-a95c-7d7a479afe28",
+  "ioValues": [],
+  "topLevel": true,
+  "allAtoms": [
+    {
+      "atomType": "Output",
+      "name": "Output",
+      "x": 0.98,
+      "y": 0.5,
+      "uniqueID": "932dd29a-bf74-42fb-a155-21ad4fbf0776",
+      "ioValues": []
+    },
+    {
+      "atomType": "Code",
+      "name": "Code",
+      "x": 0.49588289112534306,
+      "y": 0.5217391304347826,
+      "uniqueID": "db7d8296-29e2-4499-9963-94f044be6347",
+      "ioValues": [
+        {
+          "name": "height",
+          "ioValue": 10
+        },
+        {
+          "name": "majorRadius",
+          "ioValue": 10
+        }
+      ],
+      "codeVersion": 1,
+      "code": "\n      const Inputs = [\n       {inputName: \"minorRadius\", type: \"geometry\", defaultValue: 5},\n      {inputName: \"majorRadius\", type: \"number\", defaultValue: 10},\n        {inputName: \"height\", type: \"number\", defaultValue: 10}\n      ]\n\n      let createdRectangle = replicad.drawRectangle(5, 7)\n      const newPlane = new replicad.Plane().pivot(0, 'Y')\n      let profile = new replicad.Sketch().addCircle(minorRadius).translate([majorRadius, 0, 0]);\nconsole.log(profile)\n      let createdShape = profile.revolve();\n\n      //Wrap the raw replicad geometry in our assembly format\n      let shape2 = {\n          geometry: [createdShape],\n          dimension: \"3D\",\n          tags: [\"createdShape\"],\n          color: '#A3CE5B',\n          plane: newPlane,\n          bom: []\n      }\nreturn shape2"
+    }
+  ],
+  "allConnectors": [],
+  "unitsKey": "MM",
+  "fileTypeVersion": 1,
+  "compiledBom": {},
+  "filetypeVersion": 1
 }
