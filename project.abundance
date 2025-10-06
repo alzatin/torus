@@ -18,8 +18,8 @@
     {
       "atomType": "Code",
       "name": "Code",
-      "x": 0.5818847209515096,
-      "y": 0.35093167701863354,
+      "x": 0.5782250686184813,
+      "y": 0.34782608695652173,
       "uniqueID": "db7d8296-29e2-4499-9963-94f044be6347",
       "ioValues": [
         {
@@ -33,7 +33,7 @@
         }
       ],
       "codeVersion": 1,
-      "code": "\n      const Inputs = [\n        \n       {inputName: \"circleShape\", type: \"geometry\", defaultValue: null},\n       {inputName: \"minorRadius\", type: \"number\", defaultValue: 5},\n      {inputName: \"majorRadius\", type: \"number\", defaultValue: 10},\n      ]\n\n\n       let createdRectangle = replicad.drawCircle(5, 7)\n      const newPlane = new replicad.Plane().pivot(0, 'Y')\n      let createdShape = createdRectangle.sketchOnPlane(newPlane).translate([0,0,0])\n       //const torus = createdCircle.revolve();\n  //Use the built-in Move function to move the shape in the X direction\n      let movedShape = await Move(importedShape, 5, 0, 0)\n\n      //Use the built-in Rotate function to rotate the shape\n      let rotatedShape = await Rotate(importedShape, 0, 45, 0)\n\n      //Wrap the raw replicad geometry in our assembly format\n      let shape2 = {\n          geometry: [createdShape],\n          dimension: \"3D\",\n          tags: [\"createdShape\"],\n          color: '#A3CE5B',\n          plane: newPlane,\n          bom: []\n      }\nreturn shape2"
+      "code": "\n      const Inputs = [\n        \n       {inputName: \"circleShape\", type: \"geometry\", defaultValue: null},\n       {inputName: \"minorRadius\", type: \"number\", defaultValue: 5},\n      {inputName: \"majorRadius\", type: \"number\", defaultValue: 10},\n      ]\n\n\n       let createdRectangle = library[circleShape]\n      const newPlane = new replicad.Plane().pivot(0, 'Y')\n    //Use the built-in Move function to move the shape in the X direction\n      let movedShape = await Move(createdRectangle, 15, 0, 0)\n\n      //Use the built-in Rotate function to rotate the shape\n      let rotatedShape = await Rotate(createdRectangle, 40, 0, 00)\n  console.log(rotatedShape)\n       const torus = rotatedShape.revolve();\n \n      //Wrap the raw replicad geometry in our assembly format\n      let shape2 = {\n          geometry: [torus],\n          dimension: \"3D\",\n          tags: [\"createdShape\"],\n          color: '#A3CE5B',\n          plane: newPlane,\n          bom: []\n      }\nreturn shape2"
     },
     {
       "atomType": "Circle",
@@ -88,8 +88,8 @@
     {
       "atomType": "Move",
       "name": "Move",
-      "x": 0.4062214089661482,
-      "y": 0.5993788819875777,
+      "x": 0.4071363220494053,
+      "y": 0.5962732919254659,
       "uniqueID": "dd51cb83-3165-419a-8b0b-fd4abe77239a",
       "ioValues": [
         {
