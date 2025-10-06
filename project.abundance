@@ -7,13 +7,13 @@
   "ioValues": [
     {
       "name": "minor radius",
-      "ioValue": 4,
-      "currentEquation": "4"
+      "ioValue": 3,
+      "currentEquation": "3"
     },
     {
       "name": "major radius",
-      "ioValue": 15,
-      "currentEquation": "15"
+      "ioValue": 30,
+      "currentEquation": "30"
     }
   ],
   "topLevel": true,
@@ -29,14 +29,13 @@
     {
       "atomType": "Code",
       "name": "Code",
-      "x": 0.5590118938700823,
-      "y": 0.5372670807453416,
+      "x": 0.6102470265324794,
+      "y": 0.48136645962732916,
       "uniqueID": "db7d8296-29e2-4499-9963-94f044be6347",
       "ioValues": [
         {
           "name": "majorRadius",
-          "ioValue": 15,
-          "currentEquation": "10"
+          "ioValue": 30
         }
       ],
       "codeVersion": 1,
@@ -51,8 +50,7 @@
       "ioValues": [
         {
           "name": "diameter",
-          "ioValue": 4,
-          "currentEquation": "5"
+          "ioValue": 3
         }
       ]
     },
@@ -69,13 +67,11 @@
         },
         {
           "name": "y-axis degrees",
-          "ioValue": 90,
-          "currentEquation": "90"
+          "ioValue": 90
         },
         {
           "name": "z-axis degrees",
-          "ioValue": 0,
-          "currentEquation": "0"
+          "ioValue": 0
         }
       ]
     },
@@ -88,8 +84,7 @@
       "ioValues": [
         {
           "name": "xDist",
-          "ioValue": 15,
-          "currentEquation": "15"
+          "ioValue": 15
         },
         {
           "name": "yDist",
@@ -118,19 +113,6 @@
       "uniqueID": "1c96da38-115d-4653-9d89-fbc74e18d788",
       "ioValues": [],
       "type": "number"
-    },
-    {
-      "atomType": "Circle",
-      "name": "Circle",
-      "x": 0.383348581884721,
-      "y": 0.7795031055900621,
-      "uniqueID": "beee49b8-cdcb-4f50-927f-6c9e85afcf24",
-      "ioValues": [
-        {
-          "name": "diameter",
-          "ioValue": 15
-        }
-      ]
     }
   ],
   "allConnectors": [
@@ -169,12 +151,6 @@
       "ap2Name": "majorRadius",
       "ap1ID": "1c96da38-115d-4653-9d89-fbc74e18d788",
       "ap2ID": "db7d8296-29e2-4499-9963-94f044be6347"
-    },
-    {
-      "ap1Name": "number or geometry",
-      "ap2Name": "diameter",
-      "ap1ID": "1c96da38-115d-4653-9d89-fbc74e18d788",
-      "ap2ID": "beee49b8-cdcb-4f50-927f-6c9e85afcf24"
     }
   ],
   "unitsKey": "MM",
