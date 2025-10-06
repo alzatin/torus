@@ -1,0 +1,15 @@
+{
+    "atomType": "Molecule",
+    "name": "torus",
+    "x": 0,
+    "y": 0,
+    "uniqueID": "2ec8d6d5-6791-4e47-a95c-7d7a479afe28",
+    "ioValues": [],
+    "topLevel": true,
+    "allAtoms": [],
+    "allConnectors": [],
+    "unitsKey": "MM",
+    "fileTypeVersion": 1,
+    "compiledBom": {},
+    "filetypeVersion": 1
+}
